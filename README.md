@@ -1,4 +1,4 @@
-# 🗣️ Voice Assistant with Conversational RAG
+# 🤖🎤 Voice Assistant with Conversational RAG
 
 This project is a fully voice-enabled AI assistant built with Python. It uses **OpenAI Whisper** for speech recognition, **LangChain RAG (Retrieval-Augmented Generation)** with chat history awareness for contextual responses, and **Text-to-Speech (TTS)** for replying to the user via audio.
 
@@ -26,8 +26,8 @@ This project is a fully voice-enabled AI assistant built with Python. It uses **
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/voice-assistant-rag.git
-cd voice-assistant-rag
+git clone https://github.com/yourusername/voice_assistant_rag.git
+cd voice_assistant_rag
 ```
 
 ### 2. Set up a virtual environment using Poetry
