@@ -1,12 +1,14 @@
 # TextToSpeechService
-import nltk
-import torch
 import warnings
+
+import nltk
 import numpy as np
+import torch
 from transformers import AutoProcessor, BarkModel
-#nltk.download()
-#nltk.download('punkt')
-#nltk.download('punkt_tab')
+
+# nltk.download()
+# nltk.download('punkt')
+# nltk.download('punkt_tab')
 
 # Suppress specific warning about deprecated weight normalization
 warnings.filterwarnings(
@@ -37,7 +39,8 @@ class TextToSpeechService:
         Returns:
             tuple: A tuple containing the sample rate and the generated audio array.
         """
-        inputs = self.processor(text, voice_preset=voice_preset, return_tensors="pt")
+        inputs = self.processor(
+            text, voice_preset=voice_preset, return_tensors="pt")
 
         # Explicitly create attention mask if necessary
         if "attention_mask" not in inputs:
@@ -47,7 +50,8 @@ class TextToSpeechService:
                 if self.processor.tokenizer.pad_token_id
                 else 0
             )
-            inputs["attention_mask"] = (inputs["input_ids"] != pad_token_id).long()
+            inputs["attention_mask"] = (
+                inputs["input_ids"] != pad_token_id).long()
 
         inputs = {k: v.to(self.device) for k, v in inputs.items()}
 
@@ -58,7 +62,8 @@ class TextToSpeechService:
                 if self.processor.tokenizer.pad_token_id
                 else 0
             )
-            audio_array = self.model.generate(**inputs, pad_token_id=pad_token_id)
+            audio_array = self.model.generate(
+                **inputs, pad_token_id=pad_token_id)
 
         audio_array = audio_array.cpu().numpy().squeeze()
         sample_rate = self.model.generation_config.sample_rate
@@ -75,7 +80,8 @@ class TextToSpeechService:
         """
         pieces = []
         sentences = nltk.sent_tokenize(text)
-        silence = np.zeros(int(0.25 * self.model.generation_config.sample_rate))
+        silence = np.zeros(
+            int(0.25 * self.model.generation_config.sample_rate))
 
         for sent in sentences:
             sample_rate, audio_array = self.synthesize(sent, voice_preset)
