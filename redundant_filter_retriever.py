@@ -1,7 +1,6 @@
 from langchain.embeddings.base import Embeddings
-# from langchain_community.vectorstores.chroma import Chroma
-from langchain_chroma import Chroma
 from langchain.schema import BaseRetriever
+from langchain_chroma import Chroma
 
 
 class RedundantFilterRetriever(BaseRetriever):
